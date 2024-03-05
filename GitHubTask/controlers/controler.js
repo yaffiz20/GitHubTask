@@ -1,4 +1,4 @@
-import { userModel } from "../models/userModel.js";
+import { userModel } from "../models/userModel";
 
 export const getUserById = async (req, res) => {
 try {
@@ -32,7 +32,11 @@ export const updateUserById = async (req, res) => {
         let userToUpdate = await userModel.findById(id);
         if (!userToUpdate)
             return res.status(404).send("No user was found with such a code for update")
-        await userModel.findByIdAndUpdate(id, req.body);
+        await userModel.findByIdAndUpdate(id, req.body);  
+           let validate = productValidatorForUpdate(req.body);
+           if (validate.error){
+            res.send("error")
+}
         let user = await userModel.findById(id);
         res.json(user);
     }
@@ -52,3 +56,7 @@ export const deleteUserById = async (req, res) => {
         res.status(400).send("A timeout occurred while delete the data" + err.message);
     }
 }
+
+
+ 
+
