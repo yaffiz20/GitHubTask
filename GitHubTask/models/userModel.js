@@ -1,19 +1,26 @@
-const Joi = require('joi');
-const mongoose =require('mongoose');
-const userSchema = new mongoose.Schema({
-    email: String,
-    userName: String,
-    phone: String
-})
-module.exports = mongoose.model("user", userSchema);
 
-exports.schemaForCreateUser = Joi.object({
+import Joi from 'joi';
+import mongoose from "mongoose";
+
+const userSchema = mongoose.Schema({
+  
+    userName: String,
+    phone: String,
+    email: { type: String, unique: true }
+
+});
+
+
+
+export const schemaForCreateUser = Joi.object({
   name: Joi.string().min(2).required(),
   email: Joi.string().email().required(),
   phone: Joi.string().min(10).required(),
 });
-exports.schemaForUpdateUser = Joi.object({
+export const schemaForUpdateUser = Joi.object({
     name: Joi.string().min(2),
     email: Joi.string().email(),
     phone: Joi.string().min(10),
   });
+
+  export const userModel = mongoose.model("users", userSchema);
