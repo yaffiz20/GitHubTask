@@ -12,8 +12,11 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "ava",
     "start": "node app.js"
+  },
+  "jest": {
+    "testEnvironment": "node"
   },
   "type": "module",
   "repository": {
@@ -27,6 +30,7 @@
   },
   "homepage": "https://github.com/yaffiz20/GitHubTask#readme",
   "devDependencies": {
+    "ava": "^6.1.2",
     "jest": "^29.7.0"
   }
 }
